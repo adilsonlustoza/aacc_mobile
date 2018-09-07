@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            storeFile file("X:\\PROJETOS\\AndroidStudio\\publish\\doacao_mais.apk")
+            storePassword "Ap104F"
+            keyAlias "doacao_mais"
+            keyPassword "Ap104F"
+        }
+    }
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        applicationId "br.com.lustoza.doacaomais"
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 5
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+        }
+    }
+    productFlavors {
+    }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
+}
+
+ext {
+    playServicesVersion = '11.0.4' // update accordingly
+    suportVersion = '25.3.1'
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-messaging:11.0.4'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:preference-v7:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    //------------------------------------------Google----------------------------------------------
+    compile "com.google.android.gms:play-services-maps:${playServicesVersion}"
+    compile "com.google.android.gms:play-services-ads:${playServicesVersion}"
+    compile "com.google.android.gms:play-services-auth:${playServicesVersion}"
+    compile "com.google.android.gms:play-services-gcm:${playServicesVersion}"
+    compile "com.google.android.gms:play-services-drive:${playServicesVersion}"
+    compile "com.google.android.gms:play-services-location:${playServicesVersion}"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //------------------------------------------Terceiros----------------------------------------------
+    compile 'cn.carbs.android:MDDialog:1.0.0'
+    compile 'com.github.yesidlazaro:GmailBackground:1.2.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.volley:volley:1.1.0'
+    compile 'me.tatarka.support:jobscheduler:0.1.1'
+    compile 'org.sufficientlysecure:html-textview:3.5'
+    //-----------------------------------------Teste--------------------------------------------
+    testCompile 'junit:junit:4.12'
+    //-----------------------------------------Grafico--------------------------------------------
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+}
+
+
+
+
+
+apply plugin: 'com.google.gms.google-services'

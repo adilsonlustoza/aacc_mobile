@@ -1,0 +1,7 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/shape_status">
+        <shape android:shape="oval">
+            <solid android:color="@android:color/black"/>
+        </shape>
+    </item>
+    <item android:drawable="@drawable/pin_venda_rouded_32"/></layer-list>

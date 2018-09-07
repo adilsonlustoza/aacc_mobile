@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#00E676</color>
+    <color name="colorPrimaryDark">#00C853</color>
+    <color name="colorAccent">#FFAB40</color>
+    <color name="colorHighlight">#d3d3d3</color>
+    <color name="colorGreenWhite">#f0fff0</color>
+    <color name="colorBackground">#FFF3E0</color>
+
+
+    <color name="colorLink">#A5D6A7</color>
+
+    <color name="colorText">#212121</color>
+    <color name="colorSubTitle">#616161</color>
+    <color name="colorTitle">#424242</color>
+    <color name="colorInfo">#9E9E9E</color>
+
+    <color name="background">#B9F6CA</color>
+
+    <color name="cardbackground">#FFF3E0</color>
+
+    <color name="colorGreen">#00E676</color>
+
+    <color name="colorFontWhite">#FFFFFF</color>
+    <color name="colorMagenta">#FF00FF</color>
+    <color name="colorAmarelo">#FFFF00</color>
+    <color name="colorPreto">#000000</color>
+    <color name="colorGrayVeryLight">#fafafa</color>
+
+
+
+    <color name="colorTransparente">#80000000</color>
+    <color name="color_grey">#607D8B</color>
+
+
+    <color name="materialColorRed500">#F44336</color>
+    <color name="materialColorPink500">#E91E63</color>
+    <color name="materialColorPurple500">#9C27B0</color>
+    <color name="materialColorDeepPuple500">#673AB7</color>
+    <color name="materialColorIndigo500">#3F51B5</color>
+    <color name="materialColorBlue500">#2196F3</color>
+    <color name="materialColorLightBlue500">#03A9F4</color>
+    <color name="materialColorCyan500">#00BCD4</color>
+    <color name="materialColorTeal500">#009688</color>
+    <color name="materialColorGreen500">#4CAF50</color>
+    <color name="materialColorLightGreen500">#8BC34A</color>
+    <color name="materialColorLime500">#CDDC39</color>
+    <color name="materialColorYellow500">#FFEB3B</color>
+    <color name="materialColorAmber500">#FFC107</color>
+    <color name="materialColorOrange500">#FF9800</color>
+    <color name="materialColorDeepOrange500">#FF5722</color>
+    <color name="materialColorBrown500">#795548</color>
+    <color name="materialColorGrey500">#9E9E9E</color>
+
+</resources>
