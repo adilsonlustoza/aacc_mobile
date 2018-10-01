@@ -29,7 +29,6 @@ public class HandleFile {
     public HandleFile(Context context, String fileName) {
         _context = context;
         _fileName = fileName;
-
     }
 
 

@@ -21,9 +21,15 @@
             android:icon="@drawable/newspaper_24"
             android:title="Notícias" />
 
+        <item
+            android:id="@+id/nav_donation"
+            android:icon="@drawable/donation_24"
+            android:title="Doação" />
+
     </group>
 
-    <item android:title="Comunicação">
+
+    <item android:title="Comunicação" android:textColor="#000000">
         <menu>
             <item
                 android:id="@+id/nav_perfil"

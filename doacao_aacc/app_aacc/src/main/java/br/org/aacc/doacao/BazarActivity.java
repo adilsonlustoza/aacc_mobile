@@ -1,6 +1,8 @@
 package br.org.aacc.doacao;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.support.v7.widget.SearchView.SearchAutoComplete;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,12 +76,14 @@ public class BazarActivity extends _SuperActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         super.onCreateOptionsMenu(menu);
         _searchView = new SearchView(this);
+
         _searchView.setOnQueryTextListener(new ResearchMenu());
 
         MenuItem itemSearch = menu.add(0, 0, 0, "SearchView");
         itemSearch.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        itemSearch.setIcon(android.R.drawable.ic_menu_search);
         itemSearch.setActionView(_searchView);
+       // super.ChangeColorSearchView(_searchView);
+
         return true;
     }
 

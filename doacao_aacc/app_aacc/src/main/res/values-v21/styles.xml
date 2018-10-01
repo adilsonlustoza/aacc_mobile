@@ -1,20 +1,54 @@
 <resources>
+    <string name="com_facebook_loginview_log_in_button">LOGIN</string>
+    <string name="com_facebook_loginview_log_out_button">LOGOUT</string>
 
-    <!-- Base application theme. -->
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Base.Theme.ACCC" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.Theme.ACCC">
+
+        <item name="windowNoTitle">true</item>
+        <!-- Customize your theme here. -->
+
         <item name="colorControlHighlight">@color/colorHighlight</item>
 
 
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowSharedElementsUseOverlay">false</item>
+        <item name="android:textColorPrimary">@color/colorTitle</item>
+        <item name="android:textColorSecondary">@color/colorSubTitle</item>
+        <item name="android:textColor">@color/colorPreto</item>
 
+    </style>
+
+    <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/colorFontWhite</item>
+        <item name="android:textColorSecondary">@color/colorFontWhite</item>
+        <item name="android:textColor">@color/colorFontWhite</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/colorFontWhite</item>
+        <item name="android:textColorSecondary">@color/colorFontWhite</item>
+        <item name="android:textColor">@color/colorPreto</item>
+    </style>
+
+
+    <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPreto</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

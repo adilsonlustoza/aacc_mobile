@@ -1,5 +1,6 @@
 package br.org.aacc.doacao;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
@@ -11,20 +12,25 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -38,6 +44,8 @@ import com.facebook.login.LoginManager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.lang.reflect.Field;
 
 import br.org.aacc.doacao.Api.FacebookApi;
 import br.org.aacc.doacao.Domain.Caccc;
@@ -140,6 +148,52 @@ public class _SuperActivity extends AppCompatActivity implements NavigationView.
         _cacccUtilApplication = (UtilApplication<Caccc>) getApplicationContext();
 
 
+    }
+
+
+
+    protected void ChangeColorSearchView(SearchView searchView){
+
+        int searchPlateId = searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+
+            EditText searchPlate =  searchView.findViewById(searchPlateId);
+        searchPlate.setTextColor(getResources().getColor(R.color.colorFontWhite));
+        searchPlate.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        searchPlate.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        setSearchIcons(searchView);
+    }
+
+    private void setSearchIcons(SearchView searchView) {
+        try {
+
+            Field searchField = SearchView.class.getDeclaredField("mCloseButton");
+            searchField.setAccessible(true);
+            ImageView closeBtn = (ImageView) searchField.get(searchView);
+            closeBtn.setImageResource(R.drawable.close_16);
+
+            searchField = SearchView.class.getDeclaredField("mVoiceButton");
+            searchField.setAccessible(true);
+            ImageView voiceBtn = (ImageView) searchField.get(searchView);
+            voiceBtn.setImageResource(R.drawable.voice_16);
+
+            searchField = SearchView.class.getDeclaredField("mSearchButton");
+            searchField.setAccessible(true);
+            ImageView searchBtn = (ImageView) searchField.get(searchView);
+            searchBtn.setImageResource(R.drawable.search_16);
+
+
+        /*    searchField = SearchView.class.getDeclaredField("mSearchHintIcon");
+            searchField.setAccessible(true);
+            ImageView searchHintBtn = (ImageView) searchField.get(searchView);
+            searchHintBtn.setImageResource(R.drawable.phone_key_board_16);*/
+
+
+
+        } catch (NoSuchFieldException e) {
+            Log.e("SearchView", e.getMessage(), e);
+        } catch (IllegalAccessException e) {
+            Log.e("SearchView", e.getMessage(), e);
+        }
     }
 
     protected void ConfigureNavegationDrawer() {

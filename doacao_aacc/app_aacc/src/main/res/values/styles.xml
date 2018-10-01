@@ -4,24 +4,26 @@
     <string name="com_facebook_loginview_log_out_button">LOGOUT</string>
 
 
-    <style name="Base.Theme.DoacaoMais" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Base.Theme.ACCC" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
     </style>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Base.Theme.DoacaoMais">
+    <style name="AppTheme" parent="Base.Theme.ACCC">
 
         <item name="windowNoTitle">true</item>
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+
         <item name="colorControlHighlight">@color/colorHighlight</item>
 
 
-        <item name="android:textColorPrimary">@color/colorPreto</item>
-        <item name="android:textColorSecondary">@color/color_grey</item>
-        <item name="android:textColor">@color/colorHighlight</item>
+        <item name="android:textColorPrimary">@color/colorTitle</item>
+        <item name="android:textColorSecondary">@color/colorSubTitle</item>
+        <item name="android:textColor">@color/colorPreto</item>
 
     </style>
 
@@ -32,22 +34,30 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorPrimary">@color/colorPreto</item>
-        <item name="android:textColorSecondary">@color/color_grey</item>
-        <item name="android:textColor">@color/colorPreto</item>
+        <item name="android:textColorPrimary">@color/colorTitle</item>
+        <item name="android:textColorSecondary">@color/colorSubTitle</item>
+        <item name="android:textColor">@color/colorFontWhite</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:textColorPrimary">@color/colorPreto</item>
-        <item name="android:textColorSecondary">@color/color_grey</item>
+        <item name="android:textColorPrimary">@color/colorTitle</item>
+        <item name="android:textColorSecondary">@color/colorFontWhite</item>
         <item name="android:textColor">@color/colorPreto</item>
     </style>
 
 
     <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Small">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/colorPreto</item>
+        <item name="android:textColor">@color/colorFontWhite</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="NavigationViewStyle">
+        <item name="android:textSize">16sp</item> <!-- menu item text size-->
+        <item name="android:listPreferredItemHeightSmall">40dp</item><!-- menu item height-->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@color/colorPreto</item>
     </style>
 
 </resources>

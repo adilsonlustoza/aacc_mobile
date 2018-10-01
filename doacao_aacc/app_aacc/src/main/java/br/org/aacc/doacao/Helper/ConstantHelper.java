@@ -17,7 +17,7 @@ public class ConstantHelper {
     public static String pref="prefSolidario";
 
     public static String pref_atualizar="pref_atualizar";
-    public static String AppName="Doação Mais";
+    public static String AppName="Doação AACC";
 
 
     public static int SplashScreenTime=4000;

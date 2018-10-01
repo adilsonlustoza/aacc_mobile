@@ -132,10 +132,10 @@ public class ImageHelper {
     }
 
     public static Uri GetImageUrl(int res){
-        return Uri.parse("android.resource://br.com.lustoza.doacaomais/" + res);
+        return Uri.parse("android.resource://br.org.aacc.doacao/" + res);
     }
     public static String GetImageUrlString(int res){
-        return Uri.parse("android.resource://br.com.lustoza.doacaomais/" + res).toString();
+        return Uri.parse("android.resource://br.org.aacc.doacao/" + res).toString();
     }
 
     public static int GetDominantColor(Bitmap bitmap) {

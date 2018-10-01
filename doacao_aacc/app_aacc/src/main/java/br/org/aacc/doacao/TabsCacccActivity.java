@@ -80,7 +80,7 @@ public class TabsCacccActivity extends _SuperActivity {
 
 
 
-            tabLayout.setTabTextColors(R.color.colorPreto, R.color.colorAccent);
+            tabLayout.setTabTextColors(R.color.colorFontWhite, R.color.colorAccent);
 
             tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
 
@@ -138,7 +138,7 @@ public class TabsCacccActivity extends _SuperActivity {
 
                     collapsingToolbarLayout = appBarLayout.findViewById(R.id.collapsing);
                     collapsingToolbarLayout.setTitle(HtmlHelper.fromHtml("<font color='#FFFFFF'>" + title + "</font>"));
-                    collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorPreto));
+                    collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorFontWhite));
                     collapsingToolbarLayout.setCollapsedTitleGravity(Gravity.LEFT);
                     collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.CollapsedAppBar);
                     collapsingToolbarLayout.setScrimAnimationDuration(ConstantHelper.OneSecond);

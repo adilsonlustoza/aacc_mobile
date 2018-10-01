@@ -57,7 +57,7 @@
                 android:maxLines="3"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:layout_below="@+id/txtTipoCampanha"
-                android:textColor="@color/colorTitle"
+                android:textColor="@color/materialColorBlue500"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:ignore="RtlHardcoded" />
@@ -82,7 +82,7 @@
                 android:layout_marginTop="5dp"
                 android:maxLines="30"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="@color/colorLink"
+                android:textColor="@color/materialColorGreen500"
                 android:textSize="12sp"
                 android:textStyle="normal"
                 android:layout_marginRight="10dp"

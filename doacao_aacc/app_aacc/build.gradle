@@ -3,22 +3,22 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         release {
-            storeFile file("X:\\PROJETOS\\AndroidStudio\\publish\\doacao_mais.apk")
+            storeFile file("X:\\PROJETOS\\AndroidStudio\\publish\\app_aacc.apk")
             storePassword "Ap104F"
-            keyAlias "doacao_mais"
+            keyAlias "app_aacc"
             keyPassword "Ap104F"
         }
     }
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "br.com.lustoza.doacaomais"
+        applicationId "br.org.aacc.doacao"
         minSdkVersion 17
         targetSdkVersion 26
         versionCode 5
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
+        multiDexEnabled false
 
     }
 
