@@ -3,8 +3,8 @@
 
     <color name="colorPrimary">#2196F3</color>
     <color name="colorPrimaryDark">#1976D2</color>
-    <color name="colorAccent">#fe0000</color>
-    <color name="colorHighlight">#2196F3</color>
+    <color name="colorAccent">#FF5252</color>
+    <color name="colorHighlight">#E0E0E0</color>
     <color name="colorGreenWhite">#f0fff0</color>
 
     <color name="cardBackground">#FFF3E0</color>
@@ -14,8 +14,8 @@
     <color name="colorLink">#A5D6A7</color>
 
     <color name="colorText">#212121</color>
-    <color name="colorSubTitle">#FFFFFF</color>
-    <color name="colorTitle">#FFFFFF</color>
+    <color name="colorSubTitle">#607D8B</color>
+    <color name="colorTitle">#212121</color>
     <color name="colorInfo">#9E9E9E</color>
 
 
