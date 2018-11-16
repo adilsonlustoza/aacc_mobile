@@ -28,7 +28,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- Change Network Configurations -->
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+   <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
 
     <!-- Permission Camera -->
     <uses-permission android:name="android.permission.CAMERA" />

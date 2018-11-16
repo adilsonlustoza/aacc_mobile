@@ -26,6 +26,7 @@ import br.org.aacc.doacao.Helper.TrackHelper;
 import br.org.aacc.doacao.R;
 import br.org.aacc.doacao.TabsCacccActivity;
 import br.org.aacc.doacao.Utils.MaskWatcher;
+import br.org.aacc.doacao.Utils.UtilApplication;
 import cn.carbs.android.library.MDDialog;
 
 import static br.org.aacc.doacao.Helper.ConstantHelper.CEL_MASK;
@@ -38,11 +39,7 @@ public class RetirarFragment extends _SuperFragment {
     private View view;
     private StringBuilder _mensagemValidation;
 
-
-    private Spinner spinnerEstadoRetirar;
-    private String EstadoPadrao = "São Paulo";
     private StringBuilder stringBuilder;
-
     private GenericParcelable<Caccc> cacccGenericParcelable;
 
     private EditText editTextNome;
@@ -79,6 +76,7 @@ public class RetirarFragment extends _SuperFragment {
     private void Init(Bundle bundle) {
 
         try {
+
             (getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
             editTexTelefone = getView().findViewById(R.id.txtTelefone);
@@ -93,10 +91,20 @@ public class RetirarFragment extends _SuperFragment {
 
             bundleArguments = this.getArguments();
 
+
+            bundleArguments = this.getArguments();
+
             if (bundleArguments != null)
                 cacccGenericParcelable = bundleArguments.getParcelable(ConstantHelper.objCaccc);
+            else
+            {
+                cacccUtilApplication= (UtilApplication<String, GenericParcelable<Caccc>>) getActivity().getApplicationContext();
+                cacccGenericParcelable =  cacccUtilApplication.getElementElementDictionary(ConstantHelper.objCaccc);
+            }
 
-            if (getArguments() != null) {
+
+            if (cacccGenericParcelable != null) {
+
                 idCentro = cacccGenericParcelable.getValue().getId();
                 eMailCentro = cacccGenericParcelable.getValue().getEmail();
                 nomeCentro = cacccGenericParcelable.getValue().getName();

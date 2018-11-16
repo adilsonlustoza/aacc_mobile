@@ -388,6 +388,7 @@
     <string name="entre_com_a_cidade">Entre com a cidade</string>
     <string name="estado">Estado</string>
     <string name="quero_doar">Como doar?</string>
+    <string name="search_hint"></string>
 
 
 </resources>

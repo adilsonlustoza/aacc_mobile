@@ -14,8 +14,6 @@ public class GenericParcelable<T> implements Parcelable {
     private T mValue;
     private static ClassLoader mClassLoader;
 
-    GenericParcelable(){}
-
     @Override
     public int describeContents() {
         return 0;
@@ -57,6 +55,6 @@ public class GenericParcelable<T> implements Parcelable {
 
     //generic method of obtaining the parcel value
     public T getValue(){
-        return (T) mValue;
+        return  mValue;
     }
 }

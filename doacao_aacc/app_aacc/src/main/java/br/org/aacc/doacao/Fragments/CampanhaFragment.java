@@ -32,12 +32,13 @@ import br.org.aacc.doacao.Helper.HttpHelper;
 import br.org.aacc.doacao.Helper.TrackHelper;
 import br.org.aacc.doacao.R;
 import br.org.aacc.doacao.Utils.HandleFile;
+import br.org.aacc.doacao.Utils.UtilApplication;
 import br.org.aacc.doacao.Utils.UtilityMethods;
 
 public class CampanhaFragment extends _SuperFragment {
 
     private static final String TAG = "CampanhaFragment";
-    private GenericParcelable<Caccc> cacccGenericParcelable;
+
     private CampanhaAdapter adapter;
     private Campanha campanha;
     private List<Campanha> campanhaList;
@@ -86,10 +87,17 @@ public class CampanhaFragment extends _SuperFragment {
             this.SwipeRefreshLayout();
 
             bundleArguments = this.getArguments();
+
             if (bundleArguments != null)
                 cacccGenericParcelable = bundleArguments.getParcelable(ConstantHelper.objCaccc);
+            else
+            {
+                cacccUtilApplication= (UtilApplication<String, GenericParcelable<Caccc>>) getActivity().getApplicationContext();
+                cacccGenericParcelable =  cacccUtilApplication.getElementElementDictionary(ConstantHelper.objCaccc);
+            }
 
-            if (getArguments() != null) {
+
+            if (cacccGenericParcelable != null) {
 
                 idCentro = cacccGenericParcelable.getValue().getId();
                 eMailCentro = cacccGenericParcelable.getValue().getEmail();

@@ -6,10 +6,15 @@
             android:id="@+id/nav_map"
             android:icon="@drawable/map_24"
             android:title="Localização" />
-        <item
+     <!--   <item
             android:id="@+id/nav_instituicoes"
             android:icon="@drawable/centros_24"
-            android:title="Entidades" />
+            android:title="Entidades" /> -->
+
+        <item
+            android:id="@+id/nav_ong"
+            android:icon="@drawable/centros_24"
+            android:title="Entidade" />
 
         <item
             android:id="@+id/nav_eventos"

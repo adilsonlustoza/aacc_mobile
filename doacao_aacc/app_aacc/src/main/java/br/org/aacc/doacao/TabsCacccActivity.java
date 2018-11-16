@@ -14,14 +14,14 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
 import br.org.aacc.doacao.Adapter.TabFragmentAdapterContainer;
 import br.org.aacc.doacao.Api.CircleTransformPicasso;
 import br.org.aacc.doacao.Domain.Caccc;
 import br.org.aacc.doacao.Helper.ConstantHelper;
 import br.org.aacc.doacao.Helper.GenericParcelable;
-import br.org.aacc.doacao.Helper.HtmlHelper;
 import br.org.aacc.doacao.Helper.TrackHelper;
+import br.org.aacc.doacao.Utils.UtilApplication;
+
 
 public class TabsCacccActivity extends _SuperActivity {
 
@@ -30,7 +30,6 @@ public class TabsCacccActivity extends _SuperActivity {
     private TabLayout tabLayout;
     private TabFragmentAdapterContainer tabCacccAdapter;
     private ViewPager viewPager;
-    private Bundle bundle;
     private String titulo;
     private ImageView imageViewCentro;
     private String urlThumbnail;
@@ -42,11 +41,14 @@ public class TabsCacccActivity extends _SuperActivity {
         setContentView(R.layout.activity_tabs);
 
         try {
-            bundle = getIntent().getExtras().getBundle(ConstantHelper.objBundle);
 
-            if (bundle != null) {
-                titulo = ((GenericParcelable<Caccc>) bundle.getParcelable(ConstantHelper.objCaccc)).getValue().getName();
-                urlThumbnail = ((GenericParcelable<Caccc>) bundle.getParcelable(ConstantHelper.objCaccc)).getValue().getUrlImage();
+            _cacccUtilApplication= (UtilApplication<String, GenericParcelable<Caccc>>) getApplicationContext();
+            _cacccGenericParcelable =  _cacccUtilApplication.getElementElementDictionary(ConstantHelper.objCaccc);
+
+            if (_cacccGenericParcelable != null) {
+
+                titulo = _cacccGenericParcelable.getValue().getName();
+                urlThumbnail = _cacccGenericParcelable.getValue().getUrlImage();
 
                 this.ConfigureToolbarSuporte();
                 this.ConfigureReturnToolbar();
@@ -79,8 +81,7 @@ public class TabsCacccActivity extends _SuperActivity {
             tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.chat).setText(ConstantHelper.TabRetirar));
 
 
-
-            tabLayout.setTabTextColors(R.color.colorFontWhite, R.color.colorAccent);
+            tabLayout.setTabTextColors(getResources().getColor(R.color.colorFontWhite), getResources().getColor(R.color.colorFontWhite));
 
             tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.colorAccent));
 
@@ -88,7 +89,7 @@ public class TabsCacccActivity extends _SuperActivity {
 
             viewPager = this.findViewById(R.id.pager);
 
-            tabCacccAdapter = new TabFragmentAdapterContainer(getSupportFragmentManager(), tabLayout.getTabCount(), bundle);
+            tabCacccAdapter = new TabFragmentAdapterContainer(getSupportFragmentManager(), tabLayout.getTabCount(), null);
 
             viewPager.setAdapter(tabCacccAdapter);
 
@@ -115,7 +116,7 @@ public class TabsCacccActivity extends _SuperActivity {
             });
 
         } catch (Exception e) {
-            TrackHelper.WriteError(this,"ConfigTabs",e.getMessage());
+            TrackHelper.WriteError(this, "ConfigTabs", e.getMessage());
 
         }
 
@@ -137,11 +138,18 @@ public class TabsCacccActivity extends _SuperActivity {
                     // appBarLayout.setExpanded(false, true);
 
                     collapsingToolbarLayout = appBarLayout.findViewById(R.id.collapsing);
-                    collapsingToolbarLayout.setTitle(HtmlHelper.fromHtml("<font color='#FFFFFF'>" + title + "</font>"));
+                    collapsingToolbarLayout.setTitle(title);
+
                     collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.colorFontWhite));
+                    collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.colorFontWhite));
+
                     collapsingToolbarLayout.setCollapsedTitleGravity(Gravity.LEFT);
-                    collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.CollapsedAppBar);
+
                     collapsingToolbarLayout.setScrimAnimationDuration(ConstantHelper.OneSecond);
+
+                    collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+                    collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
+
 
                     imageViewCentro = collapsingToolbarLayout.findViewById(R.id.imgCentro);
                     if (imageViewCentro != null) {
@@ -153,7 +161,7 @@ public class TabsCacccActivity extends _SuperActivity {
                                 .into(imageViewCentro, new Callback() {
                                     @Override
                                     public void onSuccess() {
-                                        imageViewCentro.animate().setDuration(ConstantHelper.OneSecond).alpha(1.0f).start();
+                                        //    imageViewCentro.animate().setDuration(ConstantHelper.OneSecond).alpha(1.0f).start();
                                     }
 
                                     @Override
@@ -170,9 +178,9 @@ public class TabsCacccActivity extends _SuperActivity {
                         public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
                             if (verticalOffset == 0) {
-                                //      toolbar.setLogo(null);
+                                toolbar.setLogo(null);
                             } else {
-                                //      toolbar.setLogo(R.mipmap.ic_launcher);
+                                toolbar.setLogo(R.mipmap.ic_launcher);
                             }
                         }
                     });
@@ -203,4 +211,21 @@ public class TabsCacccActivity extends _SuperActivity {
 
     }
 
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+
+
+
 }
+
+
+
+
+
+

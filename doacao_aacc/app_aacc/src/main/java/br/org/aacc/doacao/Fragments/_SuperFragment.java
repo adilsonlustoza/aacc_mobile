@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import br.org.aacc.doacao.Domain.Caccc;
 import br.org.aacc.doacao.Domain.Noticia;
 import br.org.aacc.doacao.Helper.ConstantHelper;
 import br.org.aacc.doacao.Helper.GenericParcelable;
@@ -38,10 +39,14 @@ import br.org.aacc.doacao.Helper.TrackHelper;
 import br.org.aacc.doacao.NoticiasActivity;
 import br.org.aacc.doacao.R;
 import br.org.aacc.doacao.Utils.HandleFile;
-
+import br.org.aacc.doacao.Utils.UtilApplication;
 
 
 public class _SuperFragment extends Fragment {
+
+    protected UtilApplication<String,GenericParcelable<Caccc>> cacccUtilApplication;
+    protected GenericParcelable<Caccc> cacccGenericParcelable;
+
 
     protected Bundle bundleArguments;
     protected int idCentro;
@@ -61,6 +66,8 @@ public class _SuperFragment extends Fragment {
     private Noticia noticia;
     private PieEntry pieEntry;
     private PieData pieData;
+
+
 
     public _SuperFragment() {
         // Required empty public constructor

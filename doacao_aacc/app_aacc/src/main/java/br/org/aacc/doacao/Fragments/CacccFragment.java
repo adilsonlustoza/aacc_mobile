@@ -27,7 +27,6 @@ import org.json.JSONTokener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 import br.org.aacc.doacao.Domain.Caccc;
 import br.org.aacc.doacao.Domain.ContaBancaria;
@@ -41,6 +40,7 @@ import br.org.aacc.doacao.Helper.HttpHelper;
 import br.org.aacc.doacao.Helper.TrackHelper;
 
 import br.org.aacc.doacao.Utils.HandleFile;
+import br.org.aacc.doacao.Utils.UtilApplication;
 import br.org.aacc.doacao.Utils.UtilityMethods;
 import br.org.aacc.doacao.WebViewActivity;
 import br.org.aacc.doacao.R;
@@ -48,7 +48,7 @@ import br.org.aacc.doacao.R;
 
 public class CacccFragment extends _SuperFragment {
 
-    private GenericParcelable<Caccc> cacccGenericParcelable;
+
     private ImageView imageViewPagSeguro;
     private ImageView imageViewPayPal;
     private TextView lblNomeCentro,lblTelefoneCentro,lblEmailCentro,lblEnderecoCentro,lblCepCentro;
@@ -70,10 +70,7 @@ public class CacccFragment extends _SuperFragment {
     private StringBuilder _sbConteudo;
     private StringBuilder _sbContaBancaria;
     private String url;
-    private Pattern pattern;
 
-    private String _sTelefone;
-    private String _sEmail;
     private NestedScrollView  _nestedScrollViewNoticias;
 
     public CacccFragment() {
@@ -115,6 +112,7 @@ public class CacccFragment extends _SuperFragment {
         (getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
             bundleArguments = this.getArguments();
+
             this._nestedScrollViewNoticias = getView().findViewById(R.id.nestedScrollViewNoticias);
 
             this._nestedScrollViewNoticias.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +124,12 @@ public class CacccFragment extends _SuperFragment {
 
             if (bundleArguments != null)
                 cacccGenericParcelable = bundleArguments.getParcelable(ConstantHelper.objCaccc);
+            else
+            {
+                cacccUtilApplication= (UtilApplication<String, GenericParcelable<Caccc>>) getActivity().getApplicationContext();
+                cacccGenericParcelable =  cacccUtilApplication.getElementElementDictionary(ConstantHelper.objCaccc);
+
+            }
 
             this.handleFile = new HandleFile(getContext(), ConstantHelper.fileListarConteudoContasPorCaccc);
 
@@ -133,7 +137,8 @@ public class CacccFragment extends _SuperFragment {
 
                 this.progressBar = getView().findViewById(R.id.progress_bar);
 
-                if (getArguments() != null) {
+                if (cacccGenericParcelable != null) {
+
                     idCentro = cacccGenericParcelable.getValue().getId();
                     eMailCentro = cacccGenericParcelable.getValue().getEmail();
                     url = String.format("%s%d", ConstantHelper.urlWebApiConteudoContasPorCaccc, idCentro);

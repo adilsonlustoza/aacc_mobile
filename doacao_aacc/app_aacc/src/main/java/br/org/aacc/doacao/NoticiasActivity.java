@@ -1,19 +1,23 @@
 package br.org.aacc.doacao;
 
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
+import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +51,7 @@ public class NoticiasActivity extends _SuperActivity implements View.OnCreateCon
     private SwipeRefreshLayout _swipeRefreshLayout;
     private ImageView imageViewConsultaVazia;
     private String url;
+    private SearchView searchView;
 
 
     //region ***Ciclo de Vida***
@@ -63,19 +68,28 @@ public class NoticiasActivity extends _SuperActivity implements View.OnCreateCon
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         super.onCreateOptionsMenu(menu);
-        _searchView = new SearchView(this);
-        _searchView.setOnQueryTextListener(new ResearchMenu());
+        try {
+        getMenuInflater().inflate(R.menu.menu_search,menu );
+        MenuItem itemSearch = menu.findItem(R.id.action_search );
+        searchView = (SearchView) itemSearch.getActionView();
+        searchView.setQueryHint("Pesquisar");
 
-        if (noticiaGenericParcelable != null) {
-            _searchView.setQuery(noticiaGenericParcelable.getValue().getName(), false);
-            _searchView.clearFocus();
+        searchView.setOnQueryTextListener( new ResearchMenu());
+
+         if (noticiaGenericParcelable != null) {
+            searchView.setQuery(noticiaGenericParcelable.getValue().getName(), false);
+            searchView.clearFocus();
         }
 
-        MenuItem itemSearch = menu.add(0, 0, 0, "SearchView");
-        itemSearch.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        itemSearch.setIcon(android.R.drawable.ic_menu_search);
-        itemSearch.setActionView(_searchView);
+          itemSearch.setActionView(searchView) ;
+
+
+        } catch (Exception e) {
+            TrackHelper.WriteError(this, "onInit", e.getMessage());
+        }
+
         return true;
+
     }
 
     @Override
@@ -199,7 +213,7 @@ public class NoticiasActivity extends _SuperActivity implements View.OnCreateCon
 
     //region ***Funcoes Especiais***
 
-    private class ResearchMenu implements SearchView.OnQueryTextListener {
+    private class ResearchMenu implements   SearchView.OnQueryTextListener {
 
         @Override
         public boolean onQueryTextSubmit(String s) {
