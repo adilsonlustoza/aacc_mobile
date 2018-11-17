@@ -14,11 +14,8 @@ public class ConstantHelper {
     public static final String _urlPayPal="https://www.paypal.com/cgi-bin/webscr ";
     public static final String _urlPolitica="http://www.adilsonlustoza.com/Analista/Programador/Politica";
 
-    public static String pref="prefSolidario";
-
     public static String pref_atualizar="pref_atualizar";
     public static String AppName="Doação AACC";
-
 
     public static int SplashScreenTime=4000;
     public static int OneSecond = 1000;
@@ -39,7 +36,6 @@ public class ConstantHelper {
     public static  String TabSobre="Sobre";
     public static  String TabBoletim="Panfleto";
     public static  String TabRetirar="Correio";
-    public static  String TabDonation="Doação";
 
     public static String IntentStartAllServices="doacao.mais.start.services";
 
@@ -49,7 +45,7 @@ public class ConstantHelper {
     public  static String emailToTest="adilson1979@hotmail.com";
     public  static String objBundle="objBundle";
 
-    public  static String emailSubjectRetirada="Você recebeu uma mensagem através do App Doação Mais";
+    public  static String emailSubjectRetirada="Você recebeu uma mensagem através do App AACC";
 
     public  static String objCaccc="objCaccc";
     public  static String objBazar="objBazar";
@@ -60,22 +56,22 @@ public class ConstantHelper {
     public static String urlWebApiListAllNotificacoes="http://doacaomais.adilsonlustoza.com/Analista/Programador/Notificacao/ListarNotificacoesAtivas";
 
     public  static String urlWebApiListAllCaccc="http://doacaomais.adilsonlustoza.com/Analista/Programador/Caccc/ListarCaccc";
-    public static  String urlWebApiConteudoContasPorCaccc ="http://10.0.2.2/Appointment.WebApi/Analista/Programador/Caccc/ConteudoContasPorCaccc";
+    public static  String urlWebApiConteudoContasPorCaccc ="http://10.0.2.2/Appointment.WebApi/Analista/Programador/Caccc/ConteudoContasPorCaccc/{0}";
 
-    public  static String fileListOneCaccc="fileListOneCaccc.json";
+    public  static String fileConteudoContasPorCaccc="fileConteudoContasPorCaccc.json";
     public  static String fileListAllCaccc="fileListAllCaccc.json";
 
     public  static String urlWebApiListAllCacccBazar="http://doacaomais.adilsonlustoza.com/Analista/Programador/Caccc/ListarCacccBazares";
+    public static String urlWebApiListAllBazaresPorCaccc="http://10.0.2.2/Appointment.WebApi/Analista/Programador/Bazar/ListarBazarPorCacccId/{0}";
+
     public  static String fileListAllCacccBazar="fileListAllCacccBazar.json";
+    public  static String fileListAllBazaresPorCaccc="fileListAllBazaresPorCaccc.json";
 
     public  static String urlWebApiListAllBazar="http://doacaomais.adilsonlustoza.com/Analista/Programador/Bazar/ListarBazar";
     public  static String fileListAllBazar="fileListAllBazar.json";
 
     public  static String urlWebApiListAllNoticia="http://doacaomais.adilsonlustoza.com/Analista/Programador/Noticia/ListarNoticia";
     public  static String fileListAllNoticia="fileListAllNoticia.json";
-
- //   public  static String urlWebApiConteudoContasPorCaccc="http://doacaomais.adilsonlustoza.com/Analista/Programador/Caccc/ConteudoContasPorCaccc/";
-    public  static String urlWebApiCampanhasPorCaccc="http://doacaomais.adilsonlustoza.com/Analista/Programador/Boletim/ListarBoletimPorCaccc/";
 
     public  static final String  urlWebApiListAllCampanhas="http://doacaomais.adilsonlustoza.com/Analista/Programador/Boletim/ListarBoletim/";
     public  static final String  fileListAllCampanhas="fileListAllBoletim.json";
@@ -87,11 +83,6 @@ public class ConstantHelper {
     public static final String CEP_MASK="#####-###";
     public static final String CEL_MASK="(##)#####-####";
     public static final String TEL_MASK="(##)####-####";
-
-
-
-
-
 
 
 }

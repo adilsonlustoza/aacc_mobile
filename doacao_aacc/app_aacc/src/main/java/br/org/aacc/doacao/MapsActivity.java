@@ -124,13 +124,13 @@ public class MapsActivity extends _SuperActivity
         setContentView(R.layout.activity_maps);
         this.ConfigureToolbar("Localização");
         this.ConfigureReturnToolbar();
-        url = ConstantHelper.urlWebApiListAllCacccBazar;
+        url =ConstantHelper.urlWebApiListAllBazaresPorCaccc.replace("{0}","2");
 
         try {
 
             bundle = getIntent().getExtras().getBundle(ConstantHelper.objBundle);
             this.progressBar = this.findViewById(R.id.progress_bar);
-            handleFile = new HandleFile(_context, ConstantHelper.fileListAllCacccBazar);
+            handleFile = new HandleFile(_context, ConstantHelper.fileListAllBazaresPorCaccc);
 
             mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
             mapFragment.getMapAsync(this);

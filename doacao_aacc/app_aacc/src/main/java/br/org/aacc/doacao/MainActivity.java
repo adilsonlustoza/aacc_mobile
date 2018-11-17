@@ -59,20 +59,14 @@ public class MainActivity extends _SuperActivity implements View.OnClickListener
 
             cacccGenericParcelable = _cacccUtilApplication.getElementElementDictionary(ConstantHelper.objCaccc);
 
-            this.handleFile = new HandleFile(_context, ConstantHelper.fileListOneCaccc);
+            this.handleFile = new HandleFile(_context, ConstantHelper.fileConteudoContasPorCaccc);
 
-            this.url = ConstantHelper.urlWebApiConteudoContasPorCaccc + "/2";
+            this.url = ConstantHelper.urlWebApiConteudoContasPorCaccc.replace("{0}","2");
 
             if (cacccGenericParcelable != null) {
 
                 if (savedInstanceState != null && savedInstanceState.getParcelable(caccc.TAG) != null)
                     cacccGenericParcelable = savedInstanceState.getParcelable(caccc.TAG);
-
-                /*    if (cacccGenericParcelable.getValue() != null)
-                        FillCaccc(cacccGenericParcelable.getValue());
-                    else
-                        new DownloadTask().execute(url);*/
-
             }
             else
                 new DownloadTask().execute(url);
@@ -216,7 +210,7 @@ public class MainActivity extends _SuperActivity implements View.OnClickListener
     private void FillCaccc(Caccc caccc) {
         try {
             cacccGenericParcelable = new GenericParcelable<>(caccc);
-           _cacccUtilApplication.setElementDicitionary(ConstantHelper.objCaccc,cacccGenericParcelable);
+           _cacccUtilApplication.setElementDictionary(ConstantHelper.objCaccc,cacccGenericParcelable);
         } catch (Exception e) {
             TrackHelper.WriteError(this, "setAdapter", e.getMessage());
         }

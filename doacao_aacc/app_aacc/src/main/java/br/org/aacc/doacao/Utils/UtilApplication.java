@@ -33,7 +33,7 @@ public class UtilApplication<K,T> extends Application
     }
 
 
-    public void setElementDicitionary(K key,T value)
+    public void setElementDictionary(K key,T value)
     {
         if(_dictionaryApplication==null)
             _dictionaryApplication =new HashMap<>();

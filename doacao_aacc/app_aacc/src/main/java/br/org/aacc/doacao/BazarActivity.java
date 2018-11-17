@@ -74,17 +74,8 @@ public class BazarActivity extends _SuperActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        super.onCreateOptionsMenu(menu);
-        _searchView = new SearchView(this);
-
-        _searchView.setOnQueryTextListener(new ResearchMenu());
-
-        MenuItem itemSearch = menu.add(0, 0, 0, "SearchView");
-        itemSearch.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        itemSearch.setActionView(_searchView);
-       // super.ChangeColorSearchView(_searchView);
-
-        return true;
+         super.onCreateOptionsMenu(menu);
+         return true;
     }
 
     @Override
@@ -106,7 +97,7 @@ public class BazarActivity extends _SuperActivity {
     private void Init(Bundle savedInstanceState) {
         try {
 
-            this.url = ConstantHelper.urlWebApiListAllBazar;
+            this.url = ConstantHelper.urlWebApiListAllBazaresPorCaccc.replace("{0}","2");
             this.recyclerView = this.findViewById(R.id.recycleViewBazar);
             this.recyclerView.setHasFixedSize(true);
             this.recyclerView.setNestedScrollingEnabled(true);
@@ -117,7 +108,7 @@ public class BazarActivity extends _SuperActivity {
             this.imageViewConsultaVazia = this.findViewById(R.id.imgConsultaVazia);
             this.SwipeRefreshLayout();
 
-            super.handleFile = new HandleFile(_context, ConstantHelper.fileListAllBazar);
+            super.handleFile = new HandleFile(_context, ConstantHelper.fileListAllBazaresPorCaccc);
 
             if (savedInstanceState != null && savedInstanceState.getParcelable(bazar.TAG) != null) {
                 genericParcelable = savedInstanceState.getParcelable(bazar.TAG);
@@ -133,52 +124,7 @@ public class BazarActivity extends _SuperActivity {
         }
     }
 
-    private class ResearchMenu implements SearchView.OnQueryTextListener {
 
-        @Override
-        public boolean onQueryTextSubmit(String s) {
-            this.ExecuteQuery(s);
-            return false;
-        }
-
-        @Override
-        public boolean onQueryTextChange(String s) {
-            this.ExecuteQuery(s);
-            return false;
-
-        }
-
-        private void ExecuteQuery(String s) {
-            int count = bazarList.size();
-            bazarListKeep = new ArrayList<>();
-
-            while (count > 0) {
-                Bazar bazar = bazarList.get(count - 1);
-                if (bazar.getName().toLowerCase().contains(s.toLowerCase()))
-                    bazarListKeep.add(bazar);
-                count--;
-            }
-
-            if (TextUtils.isEmpty(s)) {
-                FillAdapter(bazarList);
-                recyclerView.setVisibility(View.VISIBLE);
-                imageViewConsultaVazia.setVisibility(View.GONE);
-            } else {
-
-                FillAdapter(bazarListKeep);
-
-                if (bazarListKeep.size() <= 0) {
-                    recyclerView.setVisibility(View.GONE);
-                    imageViewConsultaVazia.setVisibility(View.VISIBLE);
-                } else {
-                    recyclerView.setVisibility(View.VISIBLE);
-                    imageViewConsultaVazia.setVisibility(View.GONE);
-                }
-
-            }
-
-        }
-    }
 
     private void SwipeRefreshLayout() {
         try {
