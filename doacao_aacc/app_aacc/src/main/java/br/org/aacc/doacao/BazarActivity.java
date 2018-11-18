@@ -1,8 +1,6 @@
 package br.org.aacc.doacao;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,16 +10,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.Toast;
-import android.support.v7.widget.SearchView.SearchAutoComplete;
-
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,30 +142,36 @@ public class BazarActivity extends _SuperActivity {
         }
     }
 
-    private void ParseJsonToDomain(String result) throws JSONException {
+    private void ParseJsonToDomain(String result) {
         try {
-            _jsonArrayResponse = new JSONArray(result);
-            bazarList = new ArrayList<>();
 
-            for (int i = 0; i < _jsonArrayResponse.length(); i++) {
-                _jsonObject = _jsonArrayResponse.optJSONObject(i);
-                bazar = new Bazar();
-                bazar.setId(_jsonObject.optInt("BazarId"));
-                bazar.setName(_jsonObject.optString("Nome"));
-                bazar.setUrlImage(_jsonObject.optString("UrlImagem"));
-                bazar.setInformacao(_jsonObject.optString("Informacao"));
+            _jsonObject = new JSONObject(result);
 
-                //---------------------------------------Endereco-------------------------------------
-                endereco = new Endereco();
-                endereco.setBairro(_jsonObject.optJSONObject("Endereco").optString("Bairro"));
-                endereco.setLatitude(_jsonObject.optJSONObject("Endereco").optDouble("Latitude"));
-                endereco.setLongitude(_jsonObject.optJSONObject("Endereco").optDouble("Longitude"));
-                bazar.setEndereco(endereco);
-                //-----------------------------------------------------------------------------------
+            if(_jsonObject!=null) {
 
-                bazarList.add(bazar);
+                _jsonArrayResponse =_jsonObject.getJSONArray("Bazares");
+
+                bazarList = new ArrayList<>();
+
+                for (int i = 0; i < _jsonArrayResponse.length(); i++) {
+                    _jsonObject = _jsonArrayResponse.optJSONObject(i);
+                    bazar = new Bazar();
+                    bazar.setId(_jsonObject.optInt("BazarId"));
+                    bazar.setName(_jsonObject.optString("Nome"));
+                    bazar.setUrlImage(_jsonObject.optString("UrlImagem"));
+                    bazar.setInformacao(_jsonObject.optString("Informacao"));
+
+                    //---------------------------------------Endereco-------------------------------------
+                    endereco = new Endereco();
+                    endereco.setBairro(_jsonObject.optJSONObject("Endereco").optString("Bairro"));
+                    endereco.setLatitude(_jsonObject.optJSONObject("Endereco").optDouble("Latitude"));
+                    endereco.setLongitude(_jsonObject.optJSONObject("Endereco").optDouble("Longitude"));
+                    bazar.setEndereco(endereco);
+                    //-----------------------------------------------------------------------------------
+
+                    bazarList.add(bazar);
+                }
             }
-
 
         } catch (JSONException e) {
             TrackHelper.WriteError(this, "ParseJsonToDomain", e.getMessage());

@@ -38,6 +38,7 @@ import com.google.android.gms.maps.model.Marker;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -124,7 +125,7 @@ public class MapsActivity extends _SuperActivity
         setContentView(R.layout.activity_maps);
         this.ConfigureToolbar("Localização");
         this.ConfigureReturnToolbar();
-        url =ConstantHelper.urlWebApiListAllBazaresPorCaccc.replace("{0}","2");
+        this.url = ConstantHelper.urlWebApiConteudoContasPorCaccc.replace("{0}","2");
 
         try {
 
@@ -711,16 +712,18 @@ public class MapsActivity extends _SuperActivity
         }
     }
 
-    private void parseResult(String result) throws JSONException {
+    private void parseResult(String result) {
         try {
 
 
-            _jsonArrayResponse = new JSONArray(result);
-            cacccList = new ArrayList<>();
+            _jsonObject = new JSONObject(result);
 
-            for (int i = 0; i < _jsonArrayResponse.length(); i++) {
+            if(_jsonObject!=null)
+            {
 
-                _jsonObject = _jsonArrayResponse.optJSONObject(i);
+                if(cacccList == null)
+                    cacccList =new ArrayList<>();
+
                 caccc = new Caccc();
                 caccc.setId(_jsonObject.optInt("CacccId"));
                 caccc.setName(_jsonObject.optString("Nome"));
