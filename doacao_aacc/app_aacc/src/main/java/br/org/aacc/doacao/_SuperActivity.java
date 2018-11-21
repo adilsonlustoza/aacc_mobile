@@ -59,6 +59,13 @@ import br.org.aacc.doacao.Utils.UtilApplication;
 
 public class _SuperActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    protected UtilApplication<String,GenericParcelable<Caccc>> cacccUtilApplication;
+    protected GenericParcelable<Caccc> cacccGenericParcelable;
+
+    protected int idCentro;
+    protected String nomeCentro;
+    protected String eMailCentro;
+
     protected Toolbar toolbar;
     protected DrawerLayout drawer;
     protected Activity _activity;
@@ -68,7 +75,7 @@ public class _SuperActivity extends AppCompatActivity implements NavigationView.
     protected ProgressBar progressBar;
     protected String _jsonString;
     protected String _fileJson;
-     protected SimpleDialogFragmentHelper _simpleDialogFragmentHelper;
+    protected SimpleDialogFragmentHelper _simpleDialogFragmentHelper;
     protected FragmentManager fragmentManager;
 
     protected ActionBarDrawerToggle actionBarDrawerToggle;
@@ -392,11 +399,15 @@ public class _SuperActivity extends AppCompatActivity implements NavigationView.
             else if (id == R.id.nav_ong) {
                 intent = new Intent(this, TabsCacccActivity.class);
 
-            } else if (id == R.id.nav_newspaper) {
-                intent = new Intent(this, NoticiasActivity.class);
-
             } else if (id == R.id.nav_eventos) {
                 intent = new Intent(this, BazarActivity.class);
+
+            }  else if (id == R.id.nav_newspaper) {
+                    intent = new Intent(this, NoticiasActivity.class);
+
+            }  else if (id == R.id.nav_donation) {
+                intent = new Intent(this, DoacaoActivity.class);
+
             } else if (id == R.id.nav_perfil) {
                 intent = new Intent(this, PerfilActivity.class);
 

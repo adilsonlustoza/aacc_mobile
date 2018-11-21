@@ -25,6 +25,7 @@ public class ConstantHelper {
     public static  String ToolbarSubTitleVisaoDeRua="Visão de rua";
     public static  String ToolbarSubTitleBazares="Bazares";
     public static  String ToolbarSubTitleCaccc="Entidades";
+    public static  String ToolbarSubTitleDoacao="Faça sua doação";
     public static  String ToolbarSubTitleSuper="Painel de bordo";
     public static  String ToolbarSubTitlePreferencia="Preferências";
     public static  String ToolbarSubTitlePagSeguro="Integração PagSeguro";
@@ -72,6 +73,10 @@ public class ConstantHelper {
 
     public  static String urlWebApiListAllNoticia="http://doacaomais.adilsonlustoza.com/Analista/Programador/Noticia/ListarNoticia";
     public  static String fileListAllNoticia="fileListAllNoticia.json";
+
+    public  static String urlWebApiListarNoticiasGeraisPorCacccId="http://10.0.2.2/Appointment.WebApi/Analista/Programador/Noticia/ListarNoticiasGeraisPorCacccId/{0}";
+    public  static String fileListListarNoticiasGeraisPorCacccId="fileListNoticiasGeraisPorCacccId.json";
+
 
     public  static final String  urlWebApiListAllCampanhas="http://doacaomais.adilsonlustoza.com/Analista/Programador/Boletim/ListarBoletim/";
     public  static final String  fileListAllCampanhas="fileListAllBoletim.json";

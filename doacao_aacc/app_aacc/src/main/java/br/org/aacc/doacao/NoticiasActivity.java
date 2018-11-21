@@ -68,9 +68,12 @@ public class NoticiasActivity extends _SuperActivity implements View.OnCreateCon
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         super.onCreateOptionsMenu(menu);
+
         try {
         getMenuInflater().inflate(R.menu.menu_search,menu );
+
         MenuItem itemSearch = menu.findItem(R.id.action_search );
+
         searchView = (SearchView) itemSearch.getActionView();
         searchView.setQueryHint("Pesquisar");
 
@@ -112,7 +115,8 @@ public class NoticiasActivity extends _SuperActivity implements View.OnCreateCon
 
         try {
 
-            this.url = ConstantHelper.urlWebApiListAllNoticia;
+            this.url = ConstantHelper.urlWebApiListarNoticiasGeraisPorCacccId.replace("{0}","2");
+
             this.recyclerView = this.findViewById(R.id.recycleNoticia);
             this.recyclerView.setHasFixedSize(true);
             this.recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -122,7 +126,7 @@ public class NoticiasActivity extends _SuperActivity implements View.OnCreateCon
             this.imageViewConsultaVazia = this.findViewById(R.id.imgConsultaVazia);
             this.SwipeRefreshLayout();
 
-            handleFile = new HandleFile(_context, ConstantHelper.fileListAllNoticia);
+            handleFile = new HandleFile(_context, ConstantHelper.fileListListarNoticiasGeraisPorCacccId);
             bundle = getIntent().getBundleExtra(ConstantHelper.objBundle);
 
             if (bundle != null)

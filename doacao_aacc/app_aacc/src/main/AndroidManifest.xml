@@ -28,7 +28,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- Change Network Configurations -->
-   <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" />-->
+    <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
+
 
     <!-- Permission Camera -->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -36,7 +37,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-      <!-- Always required on api < 21, needed to keep a wake lock while your job is running -->
+    <!-- Always required on api < 21, needed to keep a wake lock while your job is running -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!-- Required on api < 21 if you are using setRequiredNetworkType(int) -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -45,12 +46,12 @@
 
     <!-- Nível de Aplicacao -->
     <application
-        android:name="br.org.aacc.doacao.Utils.UtilApplication"
+        android:name=".Utils.UtilApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:noHistory="true"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
         <!-- Face e Google Meta Data -->
@@ -68,12 +69,13 @@
         <!-- Activities -->
 
         <activity
-            android:name="br.org.aacc.doacao.MainActivity"
+            android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -96,66 +98,65 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="br.org.aacc.doacao.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="br.org.aacc.doacao.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="br.org.aacc.doacao.NoticiasActivity"
+            android:name=".NoticiasActivity"
             android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="br.org.aacc.doacao.BazarActivity"
+            android:name=".BazarActivity"
             android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="br.org.aacc.doacao.CacccActivity"
+            android:name=".CacccActivity"
             android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="br.org.aacc.doacao.MapsActivity"
+            android:name=".MapsActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
             android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="br.org.aacc.doacao.TabsCacccActivity"
+            android:name=".TabsCacccActivity"
             android:label="@string/title_activity_tablayout"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name="br.org.aacc.doacao.PerfilActivity"
+            android:name=".PerfilActivity"
             android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name="br.org.aacc.doacao.PreferenciaActivity"
+            android:name=".PreferenciaActivity"
             android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="br.org.aacc.doacao.WebViewActivity"
+            android:name=".WebViewActivity"
             android:label="@string/title_activity_web_view"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="br.org.aacc.doacao.AjudaActivity"
+            android:name=".AjudaActivity"
             android:label="@string/title_activity_ajuda"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="br.org.aacc.doacao.ApresentacaoActivity"
+            android:name=".ApresentacaoActivity"
             android:label="@string/title_empty"
             android:theme="@style/AppTheme" />
-
-        <activity android:name="br.org.aacc.doacao.VisaoRuaActivity"
+        <activity
+            android:name=".VisaoRuaActivity"
             android:label="@string/title_empty"
-            android:theme="@style/AppTheme"
-            />
+            android:theme="@style/AppTheme" />
 
         <!-- BroadCast -->
 
         <receiver
-            android:name="br.org.aacc.doacao.Services.JobServiceUpdateFilesBroadcast"
+            android:name=".Services.JobServiceUpdateFilesBroadcast"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -168,7 +169,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name="br.org.aacc.doacao.Services.NotificationBroadcast"
+            android:name=".Services.NotificationBroadcast"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -184,17 +185,24 @@
         <!-- Servicos -->
 
         <service
-            android:name="br.org.aacc.doacao.Services.NotificationService"
+            android:name=".Services.NotificationService"
             android:exported="false"
             android:label="LastUpdated"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
-            android:name="br.org.aacc.doacao.Services.JobServiceUpdateFiles"
+            android:name=".Services.JobServiceUpdateFiles"
             android:exported="false"
             android:label="JobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-
+        <activity
+            android:name=".DoacaoActivity"
+            android:label="@string/title_activity_doacao"
+            android:parentActivityName="._SuperActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.org.aacc.doacao._SuperActivity" />
+        </activity>
     </application>
 
 </manifest>
