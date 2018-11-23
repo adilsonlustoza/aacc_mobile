@@ -1,14 +1,9 @@
 package br.org.aacc.doacao;
-
-
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
-
 import android.support.v7.widget.CardView;
-
 import android.text.TextUtils;
-
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,8 +24,10 @@ import br.org.aacc.doacao.Domain.Caccc;
 import br.org.aacc.doacao.Domain.ContaBancaria;
 import br.org.aacc.doacao.Domain.Conteudo;
 import br.org.aacc.doacao.Domain.ObjectValue.Endereco;
+import br.org.aacc.doacao.Domain.ObjectValue.TipoDoacao;
 import br.org.aacc.doacao.Helper.ConstantHelper;
 import br.org.aacc.doacao.Helper.GenericParcelable;
+import br.org.aacc.doacao.Helper.HtmlHelper;
 import br.org.aacc.doacao.Helper.HttpHelper;
 import br.org.aacc.doacao.Helper.TrackHelper;
 import br.org.aacc.doacao.Utils.HandleFile;
@@ -44,8 +41,6 @@ public class DoacaoActivity extends _SuperActivity {
 
     private ImageView imageViewPagSeguro;
     private ImageView imageViewPayPal;
-    private TextView lblNomeCentro,lblTelefoneCentro,lblEmailCentro,lblEnderecoCentro,lblCepCentro;
-    private TextView lblHistorico;
     private TextView lblDadosBancarios;
     private ProgressBar progressBar;
     private CardView cardViewIntegracao;
@@ -58,13 +53,10 @@ public class DoacaoActivity extends _SuperActivity {
     private ContaBancaria contaBancaria;
     private Collection<ContaBancaria> contaBancarias;
 
-
-    private StringBuilder _sbCentro;
-    private StringBuilder _sbConteudo;
     private StringBuilder _sbContaBancaria;
     private String url;
+    private Bundle bundleArguments;
 
-    private NestedScrollView _nestedScrollViewNoticias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +78,6 @@ public class DoacaoActivity extends _SuperActivity {
         this.url = ConstantHelper.urlWebApiListAllCaccc;
         this.progressBar = findViewById(R.id.progress_bar);
 
-      //  this.imageViewConsultaVazia = this.findViewById(R.id.imgConsultaVazia);
-
         if (savedInstanceState != null)
             cacccGenericParcelable = savedInstanceState.getParcelable(ConstantHelper.objCaccc);
         else
@@ -107,20 +97,11 @@ public class DoacaoActivity extends _SuperActivity {
 
                 idCentro = cacccGenericParcelable.getValue().getId();
                 eMailCentro = cacccGenericParcelable.getValue().getEmail();
-
-                url = String.format("%s%d", ConstantHelper.urlWebApiConteudoContasPorCaccc, idCentro);
-
-                if (savedInstanceState != null && savedInstanceState.getParcelable(ConstantHelper.objCaccc) != null) {
-                    cacccGenericParcelable = savedInstanceState.getParcelable(ConstantHelper.objCaccc);
-                    if (cacccGenericParcelable.getValue() != null && cacccGenericParcelable.getValue().getConteudos() != null)
-                        FillForm(cacccGenericParcelable.getValue());
-                    else
-                        new DownloadTask().execute(url);
-
-                } else
-                    new DownloadTask().execute(url);
+                this.url = ConstantHelper.urlWebApiConteudoContasPorCaccc.replace("{0}","2");
 
             }
+            else
+                new DownloadTask().execute(url);
         } catch (Exception e) {
             TrackHelper.WriteError(this, "onActivityCreated", e.getMessage());
         }
@@ -128,68 +109,15 @@ public class DoacaoActivity extends _SuperActivity {
 
     private void FillForm(Caccc caccc) {
         try {
-/*
+
             _caccc = caccc;
-
-            lblNomeCentro= getView().findViewById(R.id.lblNomeCentro);
-            lblTelefoneCentro= getView().findViewById(R.id.lblTelefoneCentro);
-            lblEmailCentro= getView().findViewById(R.id.lblEmailCentro);
-            lblEnderecoCentro= getView().findViewById(R.id.lblEnderecoCentro);
-
-
-            lblHistorico = getView().findViewById(R.id.lblHistorico);
-            lblDadosBancarios = getView().findViewById(R.id.lblDadosBancarios);
-            imageViewPagSeguro = getView().findViewById(R.id.imgPagSeguro);
-            imageViewPayPal = getView().findViewById(R.id.imgPayPay);
-            cardViewIntegracao = getView().findViewById(R.id.cardIntegracao);
+            lblDadosBancarios = this.findViewById(R.id.lblDadosBancarios);
+            imageViewPagSeguro = this.findViewById(R.id.imgPagSeguro);
+            imageViewPayPal = this.findViewById(R.id.imgPayPay);
+            cardViewIntegracao = this.findViewById(R.id.cardIntegracao);
 
 
             if (caccc != null) {
-
-                _sbCentro = new StringBuilder();
-                _sbCentro.append(String.format("<font size='14' color='gray' face='verdana'>Nome :</font> %s", caccc.getName()));
-                lblNomeCentro.setText(HtmlHelper.fromHtml(_sbCentro.toString()));
-
-                _sbCentro = new StringBuilder();
-                _sbCentro.append(String.format("<font size='14' color='gray' face='verdana'>Telefone :</font> %s ", caccc.getTelefone()));
-                lblTelefoneCentro.setText(HtmlHelper.fromHtml(_sbCentro.toString()));
-                Linkify.addLinks(lblTelefoneCentro,Linkify.PHONE_NUMBERS);
-
-                _sbCentro = new StringBuilder();
-                _sbCentro.append(String.format("<font size='14' color='gray' face='verdana'>E-mail :</font>  %s ", caccc.getEmail()));
-                lblEmailCentro.setText(HtmlHelper.fromHtml(_sbCentro.toString()));
-                Linkify.addLinks(lblEmailCentro,Linkify.EMAIL_ADDRESSES);
-
-                _sbCentro = new StringBuilder();
-                _sbCentro.append("<hr>");
-                _sbCentro.append("<br/>");
-                _sbCentro.append(String.format("<font size='14' color='#a9a9a9' face='verdana'>%s</font>", "Endereço"));
-                _sbCentro.append("<br/><br/>");
-                _sbCentro.append(String.format("<font size='14' color='gray' face='verdana'>Logradouro :</font> %s,%s", caccc.getEndereco().getLogradouro(), caccc.getEndereco().getNumero()));
-                _sbCentro.append("<br/>");
-                _sbCentro.append(String.format("<font size='14' color='gray' face='verdana'>Bairro :</font> %s", caccc.getEndereco().getBairro()));
-                _sbCentro.append("<br/>");
-                _sbCentro.append(String.format("<font size='14' color='gray' face='verdana'>Cidade :</font> %s", caccc.getEndereco().getCidade()));
-                _sbCentro.append("<br/>");
-                _sbCentro.append(String.format("<font size='14' color='gray' face='verdana'>Estado :</font> %s", caccc.getEndereco().getEstado()));
-                _sbCentro.append("<br/>");
-                _sbCentro.append(String.format("<font size='14' color='gray' face='verdana'>Cep :</font> %s", caccc.getEndereco().getCep()));
-                _sbCentro.append("<br/>");
-                lblEnderecoCentro.setText(HtmlHelper.fromHtml(_sbCentro.toString()));
-
-                _sbConteudo = new StringBuilder();
-
-                for (Conteudo itemConteudo : caccc.getConteudos()) {
-                    _sbConteudo.append(String.format("<font size='medium' color='gray'>%s</font>", itemConteudo.getTitulo()));
-                    _sbConteudo.append("<br/><br/>");
-                    _sbConteudo.append(String.format("%s", itemConteudo.getColuna()));
-                    _sbConteudo.append("<br/><br/>");
-
-                }
-
-                lblHistorico.setText(HtmlHelper.fromHtml(_sbConteudo.toString()));
-                Linkify.addLinks(lblHistorico, Linkify.ALL);
-
 
                 _sbContaBancaria = new StringBuilder();
 
@@ -229,7 +157,7 @@ public class DoacaoActivity extends _SuperActivity {
                 @Override
                 public void onClick(View v) {
                     try {
-                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent = new Intent(_context, WebViewActivity.class);
                         bundleArguments = new Bundle();
                         _caccc.setTipoDoacao(TipoDoacao.PagSeguro);
                         bundleArguments.putParcelable(ConstantHelper.objCaccc, new GenericParcelable<>(_caccc));
@@ -248,7 +176,7 @@ public class DoacaoActivity extends _SuperActivity {
                 @Override
                 public void onClick(View v) {
                     try {
-                        intent = new Intent(getActivity(), WebViewActivity.class);
+                        intent = new Intent(_context, WebViewActivity.class);
                         bundleArguments = new Bundle();
                         _caccc.setTipoDoacao(TipoDoacao.PayPal);
                         bundleArguments.putParcelable(ConstantHelper.objCaccc, new GenericParcelable<>(_caccc));
@@ -262,7 +190,7 @@ public class DoacaoActivity extends _SuperActivity {
                 }
             });
 
-            */
+
 
 
         } catch (Exception e) {
@@ -296,7 +224,7 @@ public class DoacaoActivity extends _SuperActivity {
                     }
                 }
 
-                parseResult(fileJson);
+                ParseJsonObjectCaccc(fileJson);
                 result = 1; //
 
             } catch (Exception e) {
@@ -317,10 +245,11 @@ public class DoacaoActivity extends _SuperActivity {
         }
     }
 
-    private void parseResult(String result) {
+    private void ParseJsonObjectCaccc(String result) {
         try {
 
             Object json = new JSONTokener(result).nextValue();
+
             if (json instanceof JSONObject)
                 _jsonObject = new JSONObject(result);
             else {
@@ -393,10 +322,12 @@ public class DoacaoActivity extends _SuperActivity {
                 }
 
                 caccc.setContasBancarias(contaBancarias);
+
             } else
                 TrackHelper.WriteInfo(this, "parseResult no Centro", "Não encontrado informaçoes para o centro");
 
 
+            this.FillForm(caccc);
         } catch (JSONException e) {
             TrackHelper.WriteError(this, "parseResult", e.getMessage());
         } catch (Exception e) {
