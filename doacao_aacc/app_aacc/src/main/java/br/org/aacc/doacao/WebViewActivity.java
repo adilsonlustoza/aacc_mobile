@@ -28,7 +28,6 @@ public class WebViewActivity extends _SuperActivity {
 
     private TipoDoacao tipoDoacao;
     private String postData;
-    byte[] _postBytes;
 
     private GenericParcelable<Caccc> cacccGenericParcelable;
 

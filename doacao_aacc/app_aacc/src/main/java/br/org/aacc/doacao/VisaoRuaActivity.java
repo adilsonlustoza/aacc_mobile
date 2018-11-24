@@ -61,9 +61,6 @@ public class VisaoRuaActivity extends _SuperActivity implements OnStreetViewPano
             _streetViewPanoramaFragment = (StreetViewPanoramaFragment) getFragmentManager().findFragmentById(R.id.map_street_view);
             _streetViewPanoramaFragment.getStreetViewPanoramaAsync(this);
 
-
-
-
         } catch (Exception e) {
             TrackHelper.WriteError(this, "Init Street View Activity", e.getMessage());
         }

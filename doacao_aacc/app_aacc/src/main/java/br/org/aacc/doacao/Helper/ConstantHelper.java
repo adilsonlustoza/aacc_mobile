@@ -5,6 +5,8 @@ package br.org.aacc.doacao.Helper;
  */
 public class ConstantHelper {
 
+    public static final String _apiKeyGooogle="AIzaSyDvXHJF28MFWYHR7rIdeM2LT-Ds08szxEs";
+
     public static boolean isLogado;
     public static boolean isLogadoRedesSociais;
     public static boolean foiTrocadaImagemPerfil;

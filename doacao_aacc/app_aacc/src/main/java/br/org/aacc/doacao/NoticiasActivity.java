@@ -70,10 +70,9 @@ public class NoticiasActivity extends _SuperActivity implements View.OnCreateCon
         super.onCreateOptionsMenu(menu);
 
         try {
-        getMenuInflater().inflate(R.menu.menu_search,menu );
 
         MenuItem itemSearch = menu.findItem(R.id.action_search );
-
+        itemSearch.setVisible(true);
         searchView = (SearchView) itemSearch.getActionView();
         searchView.setQueryHint("Pesquisar");
 
@@ -84,7 +83,7 @@ public class NoticiasActivity extends _SuperActivity implements View.OnCreateCon
             searchView.clearFocus();
         }
 
-          itemSearch.setActionView(searchView) ;
+        // itemSearch.setActionView(searchView) ;
 
 
         } catch (Exception e) {
@@ -168,7 +167,7 @@ public class NoticiasActivity extends _SuperActivity implements View.OnCreateCon
 
     }
 
-    private void ParseJson(String result) throws JSONException {
+    private void ParseJson(String result)  {
         try {
 
             _jsonArrayResponse = new JSONArray(result);

@@ -9,12 +9,21 @@ import android.widget.Toast;
 
 import com.facebook.AccessToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 
 import br.org.aacc.doacao.Api.FacebookApi;
 import br.org.aacc.doacao.Api.GoogleApi;
 import br.org.aacc.doacao.Domain.Caccc;
+import br.org.aacc.doacao.Domain.ContaBancaria;
+import br.org.aacc.doacao.Domain.Conteudo;
+import br.org.aacc.doacao.Domain.ObjectValue.Endereco;
 import br.org.aacc.doacao.Fragments._SuperFragment;
 import br.org.aacc.doacao.Helper.ConstantHelper;
 import br.org.aacc.doacao.Helper.GenericParcelable;
@@ -34,6 +43,11 @@ public class MainActivity extends _SuperActivity implements View.OnClickListener
     protected HandleFile handleFile;
     private GenericParcelable<Caccc> cacccGenericParcelable;
     private Caccc caccc;
+    private Endereco endereco;
+    private Conteudo conteudo;
+    private Collection<Conteudo> conteudos;
+    private ContaBancaria contaBancaria;
+    private Collection<ContaBancaria> contaBancarias;
     private String url;
 
     protected boolean _webApiSucess = false;
@@ -204,8 +218,7 @@ public class MainActivity extends _SuperActivity implements View.OnClickListener
     }
 
 
-    //------------------------------------Common Task -------------------------------------
-
+    //------------------------------------Fill  CacccObject -------------------------------------
 
     private void FillCaccc(Caccc caccc) {
         try {
@@ -216,11 +229,24 @@ public class MainActivity extends _SuperActivity implements View.OnClickListener
         }
     }
 
-    private void ParseJson(String result) {
+    private void ParseJsonObjectCaccc(String result) {
         try {
-            _jsonObject = new JSONObject(result);
 
-            if (_jsonObject != null) {
+            Object json = new JSONTokener(result).nextValue();
+
+            if (json instanceof JSONObject)
+                _jsonObject = new JSONObject(result);
+            else {
+                _jsonArrayResponse = new JSONArray(result);
+                for (int i = 0; i < _jsonArrayResponse.length(); i++) {
+                    _jsonObject = _jsonArrayResponse.optJSONObject(i);
+                    if ((_jsonObject.optInt("CacccId") == idCentro))
+                        break;
+                }
+            }
+
+            if (_jsonObject.length() > 0) {
+
                 caccc = new Caccc();
                 caccc.setId(_jsonObject.optInt("CacccId"));
                 caccc.setName(_jsonObject.optString("Nome"));
@@ -228,12 +254,64 @@ public class MainActivity extends _SuperActivity implements View.OnClickListener
                 caccc.setEmail(_jsonObject.optString("Email"));
                 caccc.setEmailPagSeguro(_jsonObject.optString("EmailPagSeguro"));
                 caccc.setEmailPayPal(_jsonObject.optString("EmailPayPal"));
+                caccc.setTelefone(_jsonObject.optString("Telefone"));
                 caccc.setTipoDoacao(UtilityMethods.EnumTipoDoacao(_jsonObject.optString("TipoDoacao")));
                 caccc.setAutorizado(UtilityMethods.IsBool(_jsonObject.optString("Autorizado")));
                 caccc.setResponsavel(_jsonObject.optString("Responsavel"));
                 caccc.setDoadores(null);
-                this.FillCaccc(caccc);
-            }
+
+                endereco = new Endereco();
+                endereco.setLogradouro(_jsonObject.optJSONObject("Endereco").getString("Logradouro"));
+                endereco.setNumero(_jsonObject.optJSONObject("Endereco").getString("Numero"));
+                endereco.setBairro(_jsonObject.optJSONObject("Endereco").getString("Bairro"));
+                endereco.setCidade(_jsonObject.optJSONObject("Endereco").getString("Cidade"));
+                endereco.setEstado(_jsonObject.optJSONObject("Endereco").getString("Estado"));
+                endereco.setCep(_jsonObject.optJSONObject("Endereco").getString("Cep"));
+                caccc.setEndereco(endereco);
+
+                _jsonArrayResponse = _jsonObject.getJSONArray("Conteudos");
+
+
+                if (_jsonArrayResponse.length() > 0) {
+                    conteudos = new ArrayList<>();
+
+                    for (int i = 0; i < _jsonArrayResponse.length(); i++) {
+
+                        conteudo = new Conteudo();
+                        conteudo.setId(_jsonArrayResponse.getJSONObject(i).getInt("ConteudoId"));
+                        conteudo.setColuna(_jsonArrayResponse.getJSONObject(i).getString("Coluna"));
+                        conteudo.setTitulo(_jsonArrayResponse.getJSONObject(i).getString("Titulo"));
+                        conteudo.setSubtitulo(_jsonArrayResponse.getJSONObject(i).getString("Subtitulo"));
+                        conteudo.setUrl(_jsonArrayResponse.getJSONObject(i).getString("Url"));
+                        conteudo.setDataCadastro(new Date());
+                        conteudos.add(conteudo);
+                    }
+                }
+                caccc.setConteudos(conteudos);
+
+                _jsonArrayResponse = _jsonObject.getJSONArray("ContasBancarias");
+
+                if (_jsonArrayResponse.length() > 0) {
+                    contaBancarias = new ArrayList<>();
+
+                    for (int i = 0; i < _jsonArrayResponse.length(); i++) {
+                        contaBancaria = new ContaBancaria();
+                        contaBancaria.setNomeBanco(_jsonArrayResponse.getJSONObject(i).getString("NomeBanco"));
+                        contaBancaria.setAgencia(_jsonArrayResponse.getJSONObject(i).getString("Agencia"));
+                        contaBancaria.setConta(_jsonArrayResponse.getJSONObject(i).getString("Conta"));
+                        contaBancaria.setBeneficiario(_jsonArrayResponse.getJSONObject(i).getString("Beneficiario"));
+                        contaBancarias.add(contaBancaria);
+                    }
+
+                }
+
+                caccc.setContasBancarias(contaBancarias);
+
+            } else
+                TrackHelper.WriteInfo(this, "parseResult no Centro", "Não encontrado informaçoes para o centro");
+
+
+            this.FillCaccc(caccc);
 
         } catch (JSONException e) {
             TrackHelper.WriteError(this, "parseResult", e.getMessage());
@@ -243,6 +321,7 @@ public class MainActivity extends _SuperActivity implements View.OnClickListener
     }
 
 
+    //------------------------------------Common Task -------------------------------------
 
     public class DownloadTask extends AsyncTask<String, Void, Integer> {
 
@@ -272,7 +351,7 @@ public class MainActivity extends _SuperActivity implements View.OnClickListener
                 else
                     _fileJson=fileJson;
 
-                ParseJson(_fileJson);
+                ParseJsonObjectCaccc(_fileJson);
                 result = 1; // Successful
 
             } catch (Exception e) {

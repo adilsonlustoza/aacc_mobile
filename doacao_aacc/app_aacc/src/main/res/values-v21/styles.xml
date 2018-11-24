@@ -18,6 +18,7 @@
         <item name="android:textColorPrimary">@color/colorTitle</item>
         <item name="android:textColorSecondary">@color/colorSubTitle</item>
         <item name="android:textColor">@color/colorPreto</item>
+        <item name="searchViewStyle">@style/SearchViewStyle</item>
 
     </style>
 
@@ -50,6 +51,21 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorFontWhite</item>
         <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView.ActionBar">
+        <!-- Gets rid of the search icon -->
+        <item name="searchIcon">@drawable/baseline_search_white_18dp</item>
+        <!-- Gets rid of the "underline" in the text -->
+        <item name="queryBackground">@color/colorFontWhite</item>
+        <!-- Gets rid of the search icon when the SearchView is expanded -->
+        <item name="searchHintIcon">@drawable/baseline_search_white_18dp</item>
+        <!-- The hint text that appears when the user has not typed anything -->
+        <item name="colorControlActivated">@color/colorFontWhite</item>
+
+        <item name="colorControlNormal">@color/colorFontWhite</item>
+
 
     </style>
 

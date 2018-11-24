@@ -17,4 +17,15 @@
         android:orderInCategory="4"
         android:title="@string/action_exit"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_search"
+        android:visible="false"
+        android:icon="@drawable/baseline_search_white_18dp"
+        android:iconTint="@color/colorFontWhite"
+        android:tooltipText="@string/search_hint"
+        android:title="@string/search_hint"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        />
 </menu>

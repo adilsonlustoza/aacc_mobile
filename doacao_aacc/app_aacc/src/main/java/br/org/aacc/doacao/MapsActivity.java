@@ -516,10 +516,10 @@ public class MapsActivity extends _SuperActivity
         new Thread() {
             public void run() {
 
-                String url = "http://maps.googleapis.com/maps/api/directions/json?" +
+                String url = "https://maps.googleapis.com/maps/api/directions/json?" +
                         "origin=" + origin.latitude + "," + origin.longitude +
                         "&destination=" + destination.latitude + "," + destination.longitude +
-                        "&sensor=false&mode=driving&alternatives=true";
+                        "&sensor=false&mode=driving&alternatives=true&key="+ConstantHelper._apiKeyGooogle + " ";
 
                 try {
 
@@ -787,10 +787,10 @@ public class MapsActivity extends _SuperActivity
 
                 this.AddMapServiceInstitute(caccc);
 
-                if (caccc.getBazars() != null) {
+             /*   if (caccc.getBazars() != null) {
                     for (Bazar bazar : caccc.getBazars())
-                        this.AddMapServiceStore(bazar);
-                }
+                     //   this.AddMapServiceStore(bazar);
+                }*/
             }
 
         } catch (Exception e) {

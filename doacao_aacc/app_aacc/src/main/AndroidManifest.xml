@@ -114,10 +114,6 @@
             android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".CacccActivity"
-            android:label="@string/title_activity_welcome"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".MapsActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
             android:label="@string/title_activity_welcome"

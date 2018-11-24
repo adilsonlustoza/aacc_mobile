@@ -1,4 +1,5 @@
 package br.org.aacc.doacao;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -65,7 +66,7 @@ public class DoacaoActivity extends _SuperActivity {
         this.ConfigureToolbar(ConstantHelper.ToolbarSubTitleDoacao);
         this.ConfigureReturnToolbar();
         this.Init(savedInstanceState);
-        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,33 +76,29 @@ public class DoacaoActivity extends _SuperActivity {
     }
 
     private void Init(Bundle savedInstanceState) {
-        this.url = ConstantHelper.urlWebApiListAllCaccc;
-        this.progressBar = findViewById(R.id.progress_bar);
-
-        if (savedInstanceState != null)
-            cacccGenericParcelable = savedInstanceState.getParcelable(ConstantHelper.objCaccc);
-        else
-        {
-            cacccUtilApplication= (UtilApplication<String, GenericParcelable<Caccc>>) getApplicationContext();
-            cacccGenericParcelable =  cacccUtilApplication.getElementElementDictionary(ConstantHelper.objCaccc);
-
-        }
-
-        this.handleFile = new HandleFile(_context, ConstantHelper.fileListarConteudoContasPorCaccc);
 
         try {
 
+
+            this.url = ConstantHelper.urlWebApiConteudoContasPorCaccc.replace("{0}", "2");
             this.progressBar = this.findViewById(R.id.progress_bar);
+            this.handleFile = new HandleFile(_context, ConstantHelper.fileConteudoContasPorCaccc);
 
-            if (cacccGenericParcelable != null) {
+            if (savedInstanceState != null)
+                cacccGenericParcelable = savedInstanceState.getParcelable(ConstantHelper.objCaccc);
+            else {
+                cacccUtilApplication = (UtilApplication<String, GenericParcelable<Caccc>>) getApplicationContext();
+                cacccGenericParcelable = cacccUtilApplication.getElementElementDictionary(ConstantHelper.objCaccc);
 
-                idCentro = cacccGenericParcelable.getValue().getId();
-                eMailCentro = cacccGenericParcelable.getValue().getEmail();
-                this.url = ConstantHelper.urlWebApiConteudoContasPorCaccc.replace("{0}","2");
+                if (cacccGenericParcelable != null) {
 
+                    idCentro = cacccGenericParcelable.getValue().getId();
+                    eMailCentro = cacccGenericParcelable.getValue().getEmail();
+                    this.FillForm(cacccGenericParcelable.getValue());
+
+                } else
+                    new DownloadTask().execute(url);
             }
-            else
-                new DownloadTask().execute(url);
         } catch (Exception e) {
             TrackHelper.WriteError(this, "onActivityCreated", e.getMessage());
         }
@@ -191,58 +188,11 @@ public class DoacaoActivity extends _SuperActivity {
             });
 
 
-
-
         } catch (Exception e) {
             TrackHelper.WriteError(this, "onControlsValuesAndActions", e.getMessage());
 
         }
 
-    }
-
-    public class DownloadTask extends AsyncTask<String, Void, Integer> {
-
-        @Override
-        protected void onPreExecute() {
-            progressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected Integer doInBackground(String... params) {
-            Integer result = 0;
-
-            try {
-
-                String fileJson = handleFile.ReadFile();
-
-                if (TextUtils.isEmpty(fileJson) || fileJson.length() < 10) {
-                    String _jsonString = HttpHelper.makeServiceCall(params[0]);
-
-                    if (_jsonString != null && _jsonString.length() > 0) {
-                        handleFile.WriteFile(_jsonString);
-                        fileJson = _jsonString;
-                    }
-                }
-
-                ParseJsonObjectCaccc(fileJson);
-                result = 1; //
-
-            } catch (Exception e) {
-                TrackHelper.WriteError(this, "DownloadTask doInBackground", e.getMessage());
-            }
-            return result; //"Failed to fetch data!";
-        }
-
-
-        @Override
-        protected void onPostExecute(Integer result) {
-            progressBar.setVisibility(View.GONE);
-            if (result == 1) {
-                FillForm(caccc);
-            } else {
-                Toast.makeText(_context, "Failed to fetch data!", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     private void ParseJsonObjectCaccc(String result) {
@@ -328,10 +278,57 @@ public class DoacaoActivity extends _SuperActivity {
 
 
             this.FillForm(caccc);
+
         } catch (JSONException e) {
             TrackHelper.WriteError(this, "parseResult", e.getMessage());
         } catch (Exception e) {
             TrackHelper.WriteError(this, "parseResult", e.getMessage());
         }
     }
+
+    public class DownloadTask extends AsyncTask<String, Void, Integer> {
+
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Integer doInBackground(String... params) {
+            Integer result = 0;
+
+            try {
+
+                String fileJson = handleFile.ReadFile();
+
+                if (TextUtils.isEmpty(fileJson) || fileJson.length() < 10) {
+                    String _jsonString = HttpHelper.makeServiceCall(params[0]);
+
+                    if (_jsonString != null && _jsonString.length() > 0) {
+                        handleFile.WriteFile(_jsonString);
+                        fileJson = _jsonString;
+                    }
+                }
+
+                ParseJsonObjectCaccc(fileJson);
+                result = 1; //
+
+            } catch (Exception e) {
+                TrackHelper.WriteError(this, "DownloadTask doInBackground", e.getMessage());
+            }
+            return result; //"Failed to fetch data!";
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            progressBar.setVisibility(View.GONE);
+            if (result == 1) {
+                FillForm(caccc);
+            } else {
+                Toast.makeText(_context, "Failed to fetch data!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 }
