@@ -10,8 +10,6 @@
 
 
     <!--Facebook Parameters-->
-    <string name="facebook_app_id">183411142466322</string>
-    <string name="fb_login_protocol_scheme">fb183411142466322</string>
     <string name="facebook_app_key">861f7b7d4231e3a77436baf6bc235f42</string>
     <string name="title_activity_login">Entrar</string>
 
@@ -176,7 +174,7 @@
     <string name="title_activity_about">AboutActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-    <string name="server_client_id">483897752722-mb7u8hejqubc184690p57v2rikn0qim7.apps.googleusercontent.com</string>
+    <string name="server_client_id">468221286402-44ti53d117iq43vlcjkc2djbaluhmtba.apps.googleusercontent.com</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="campanhas_prioritarias_fragment">Campanhas Prioritarias </string>
@@ -389,6 +387,10 @@
     <string name="estado">Estado</string>
     <string name="quero_doar">Como doar?</string>
     <string name="search_hint">Pesquisar</string>
+
+    <string name="facebook_app_id">304731080251533</string>
+    <string name="fb_login_protocol_scheme">fb304731080251533</string>
+
 
 
 </resources>

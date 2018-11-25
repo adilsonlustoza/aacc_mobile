@@ -1,43 +1,35 @@
 {
   "project_info": {
-    "project_number": "483897752722",
-    "firebase_url": "https://fir-login-doacao-mais.firebaseio.com",
-    "project_id": "firebase-login-doacao-mais",
-    "storage_bucket": "firebase-login-doacao-mais.appspot.com"
+    "project_number": "468221286402",
+    "firebase_url": "https://login-aacc.firebaseio.com",
+    "project_id": "login-aacc",
+    "storage_bucket": "login-aacc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:483897752722:android:e359fcabf961474b",
+        "mobilesdk_app_id": "1:468221286402:android:07a23c348991de1c",
         "android_client_info": {
           "package_name": "br.org.aacc.doacao"
         }
       },
       "oauth_client": [
         {
-          "client_id": "483897752722-d17guc8fk9eam7r5s7feshr4q59gaomk.apps.googleusercontent.com",
+          "client_id": "468221286402-i18c59op9ka8dn5dko60go7kr16vm6gh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.org.aacc.doacao",
+            "certificate_hash": "825d66609b81dfe313584c49ee806548a80e14fd"
+          }
+        },
+        {
+          "client_id": "468221286402-n2bfn7v1sgp1p4rspe11tnknntj045ca.apps.googleusercontent.com",
           "client_type": 3
-        },
-        {
-          "client_id": "483897752722-oolv9hk8ap64favartgokp2nba735fqd.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "br.org.aacc.doacao",
-            "certificate_hash": "f4fcaa913e17fc43f798e2a3ec1617fa39323067"
-          }
-        },
-        {
-          "client_id": "483897752722-knqulbgmehs8r6833g1rjqu36ar0lrcl.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "br.org.aacc.doacao",
-            "certificate_hash": "680a359a1ff66165d8fe89c0a4a1583ed607ff69"
-          }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBGL0JX017niha44sB6bVAa82Npf8KemZA"
+          "current_key": "AIzaSyCvPFwKsg-Dh01xB-l2aM2bBfj5pe65NeE"
         }
       ],
       "services": {
@@ -48,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "483897752722-d17guc8fk9eam7r5s7feshr4q59gaomk.apps.googleusercontent.com",
+              "client_id": "468221286402-n2bfn7v1sgp1p4rspe11tnknntj045ca.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

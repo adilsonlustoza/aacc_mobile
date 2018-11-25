@@ -190,7 +190,7 @@ public class WelcomeActivity extends _SuperActivity implements View.OnClickListe
     @Override
     public void  FacebookWidgetsEvents(){
 
-        loginFaceButton.setReadPermissions(Arrays.asList("public_profile,user_friends,email"));
+        loginFaceButton.setReadPermissions(Arrays.asList("public_profile,email"));
         // Callback registration
         loginFaceButton.registerCallback(_callbackManager, new FacebookCallback<LoginResult>() {
             @Override

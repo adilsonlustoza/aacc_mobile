@@ -24,13 +24,13 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 
 import org.json.JSONArray;
@@ -63,7 +63,6 @@ public class _SuperActivity extends AppCompatActivity implements NavigationView.
     protected GenericParcelable<Caccc> cacccGenericParcelable;
 
     protected int idCentro;
-    protected String nomeCentro;
     protected String eMailCentro;
 
     protected Toolbar toolbar;
@@ -71,7 +70,6 @@ public class _SuperActivity extends AppCompatActivity implements NavigationView.
     protected Activity _activity;
     protected MenuInflater _menuInflater;
     protected Bitmap _bitmap;
-    protected SearchView _searchView;
     protected ProgressBar progressBar;
     protected String _jsonString;
     protected String _fileJson;
@@ -118,8 +116,6 @@ public class _SuperActivity extends AppCompatActivity implements NavigationView.
     protected HandleFile handleFile;
 
 
-    private Caccc caccc;
-    private String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -264,6 +260,7 @@ public class _SuperActivity extends AppCompatActivity implements NavigationView.
         try {
 
             FacebookSdk.sdkInitialize(getApplicationContext());
+            AppEventsLogger.activateApp(this);
 
             if (AccessToken.getCurrentAccessToken() != null) {
 
